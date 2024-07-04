@@ -1,0 +1,1888 @@
+
+//
+// Define the opcodes for convenience.
+//
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Data Movement Group:
+//
+// 111 A					00 B-C
+// 000 B					01 D-E
+// 001 C					10 H-L
+// 010 D					11 SP
+// 011 E
+// 100 H
+// 101 L
+//
+// 110 M (Memory)
+//
+///////////////////////////////////////////////////////////////////////////////
+#define MOVAA   01111111
+#define MOVAB   01111000
+#define MOVAC   01111001
+#define MOVAD   01111010
+#define MOVAE   01111011
+#define MOVAH   01111100
+#define MOVAL   01111101
+
+#define MOVBA   01000111
+#define MOVBB   01000000
+#define MOVBC   01000001
+#define MOVBD   01000010
+#define MOVBE   01000011
+#define MOVBH   01000100
+#define MOVBL   01000101
+
+#define MOVCA   01001111
+#define MOVCB   01001000
+#define MOVCC   01001001
+#define MOVCD   01001010
+#define MOVCE   01001011
+#define MOVCH   01001100
+#define MOVCL   01001101
+
+#define MOVDA   01010111
+#define MOVDB   01010000
+#define MOVDC   01010001
+#define MOVDD   01010010
+#define MOVDE   01010011
+#define MOVDH   01010100
+#define MOVDL   01010101
+
+#define MOVEA   01011111
+#define MOVEB   01011000
+#define MOVEC   01011001
+#define MOVED   01011010
+#define MOVEE   01011011
+#define MOVEH   01011100
+#define MOVEL   01011101
+
+#define MOVHA   01100111
+#define MOVHB   01100000
+#define MOVHC   01100001
+#define MOVHD   01100010
+#define MOVHE   01100011
+#define MOVHH   01100100
+#define MOVHL   01100101
+
+#define MOVLA   01101111
+#define MOVLB   01101000
+#define MOVLC   01101001
+#define MOVLD   01101010
+#define MOVLE   01101011
+#define MOVLH   01101100
+#define MOVLL   01101101
+
+#define MOVAM   01111110
+#define MOVBM   01000110
+#define MOVCM   01001110
+#define MOVDM   01010110
+#define MOVEM   01011110
+#define MOVHM   01100110
+#define MOVLM   01101110
+
+#define MOVMA   01110111
+#define MOVMB   01110000
+#define MOVMC   01110001
+#define MOVMD   01110010
+#define MOVME   01110011
+#define MOVMH   01110100
+#define MOVML   01110101
+
+#define MVIA    00111110
+#define MVIB    00000110
+#define MVIC    00001110
+#define MVID    00010110
+#define MVIE    00011110
+#define MVIH    00100110
+#define MVIL    00101110
+
+#define MVIM    00110110
+
+#define LXIBC   00000001
+#define LXIDE   00010001
+#define LXIHL   00100001
+#define LXISP   00110001
+
+#define LDA     00111010
+#define STA     00110010
+
+#define LHLD    00101010
+#define SHLD    00100010
+
+#define LDAXBC  00001010
+#define LDAXDE  00011010
+
+#define STAXBC  00000010
+#define STAXDE  00010010
+
+#define XCHG    11101011
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Arithmetic Group
+//
+///////////////////////////////////////////////////////////////////////////////
+
+#define ADDA    10000111
+#define ADDB    10000000
+#define ADDC    10000001
+#define ADDD    10000010
+#define ADDE    10000011
+#define ADDH    10000100
+#define ADDL    10000101
+
+#define ADDM    10000110
+
+#define ADI     11000110
+
+#define ADCA    10001111
+#define ADCB    10001000
+#define ADCC    10001001
+#define ADCD    10001010
+#define ADCE    10001011
+#define ADCH    10001100
+#define ADCL    10001101
+
+#define ADCM    10001110
+
+#define ACI     11001110
+
+#define SUBA    10010111
+#define SUBB    10010000
+#define SUBC    10010001
+#define SUBD    10010010
+#define SUBE    10010011
+#define SUBH    10010100
+#define SUBL    10010101
+
+#define SUBM    10010110
+
+#define SUI     11010110
+
+#define SBBA    10011111
+#define SBBB    10011000
+#define SBBC    10011001
+#define SBBD    10011010
+#define SBBE    10011011
+#define SBBH    10011100
+#define SBBL    10011101
+
+#define SBBM    10011110
+
+#define SBI     11011110
+
+#define INRA    00111100
+#define INRB    00000100
+#define INRC    00001100
+#define INRD    00010100
+#define INRE    00011100
+#define INRH    00100100
+#define INRL    00101100
+
+#define INRM    00110100
+
+#define DCRA    00111101
+#define DCRB    00000101
+#define DCRC    00001101
+#define DCRD    00010101
+#define DCRE    00011101
+#define DCRH    00100101
+#define DCRL    00101101
+
+#define DCRM    00110101
+
+#define INXB    00000011
+#define INXD    00010011
+#define INXH    00100011
+#define INXSP   00110011
+
+#define DCXB    00001011
+#define DCXD    00011011
+#define DCXH    00101011
+#define DCXSP   00111011
+
+#define DADB    00001001
+#define DADD    00011001
+#define DADH    00101001
+#define DADSP   00111001
+
+#define DAA     00100111
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Logical Group
+//
+///////////////////////////////////////////////////////////////////////////////
+#define ANAA    10100111
+#define ANAB    10100000
+#define ANAC    10100001
+#define ANAD    10100010
+#define ANAE    10100011
+#define ANAH    10100100
+#define ANAL    10100101
+
+#define ANAM    10100110
+
+#define ANI     11100110
+
+#define XRAA    10101111
+#define XRAB    10101000
+#define XRAC    10101001
+#define XRAD    10101010
+#define XRAE    10101011
+#define XRAH    10101100
+#define XRAL    10101101
+
+#define XRAM    10101110
+
+#define XRI     11101110
+
+#define ORAA    10110111
+#define ORAB    10110000
+#define ORAC    10110001
+#define ORAD    10110010
+#define ORAE    10110011
+#define ORAH    10110100
+#define ORAL    10110101
+
+#define ORAM    10110110
+
+#define ORI     11110110
+
+#define CMPA    10111111
+#define CMPB    10111000
+#define CMPC    10111001
+#define CMPD    10111010
+#define CMPE    10111011
+#define CMPH    10111100
+#define CMPL    10111101
+
+#define CMPM    10111110
+
+#define CPI     11111110
+
+#define CMA     00101111
+
+#define RLC     00000111
+#define RRC     00001111
+#define RAL     00010111
+#define RAR     00011111
+
+#define CMC     00111111
+#define STC     00110111
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Branch Group
+//
+// NZ = 000 ( Z = 0)
+//  Z = 001 ( Z = 1)
+// NC = 010 (CY = 0)
+//  C = 011 (CY = 1)
+// PO = 100 ( P = 0)
+// PE = 101 ( P = 1)
+//  P = 110 ( S = 0)
+//  M = 111 ( S = 1)
+//
+///////////////////////////////////////////////////////////////////////////////
+
+#define CALL    11001101
+#define RET     11001001
+#define JMP     11000011
+
+#define JNZ     11000010
+#define JZ      11001010
+#define JNC     11010010
+#define JC      11011010
+#define JPO     11100010
+#define JPE     11101010
+#define JP      11110010
+#define JM      11111010
+
+#define CNZ     11000100
+#define CZ      11001100
+#define CNC     11010100
+#define CC      11011100
+#define CPO     11100100
+#define CPE     11101100
+#define CP      11110100
+#define CM      11111100
+
+#define RNZ     11000000
+#define RZ      11001000
+#define RNC     11010000
+#define RC      11011000
+#define RPO     11100000
+#define RPE     11101000
+#define RP      11110000
+#define RM      11111000
+
+#define RST     11XXX111
+
+#define PCHL    11101001
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Stack, I/O, and Machine Control Group
+//
+///////////////////////////////////////////////////////////////////////////////
+
+#define PUSHB   11000101
+#define PUSHD   11010101
+#define PUSHH   11100101
+#define PUSHPSW 11110101
+#define POPB    11000001
+#define POPD    11010001
+#define POPH    11100001
+#define POPPSW  11110001
+
+#define XTHL    11100011
+#define SPHL    11111001
+
+#define NOP     00XX0000
+#define HLT     01110110
+#define OUT     11010011
+#define IN      11011011
+
+#define EI      11111011
+#define DI      11110011
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Conditions: fields embedded in the MicroROM address. High bit to low bit.
+//
+///////////////////////////////////////////////////////////////////////////////
+
+cond state:2;       // State
+cond INT:1;         // Interrupt pending
+cond FLAG:1;        // Selected Flag
+cond OP:8;          // The opcode field of the IR
+cond uaddr:4;       // uC counter
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Signals: outputs of the MicroROM
+// Circuit | uCode
+//   X_out = r_X
+//   X_in  = w_X
+//
+///////////////////////////////////////////////////////////////////////////////
+
+signal nop       = ................................;
+signal PCen      = ...............................1;
+signal CLR_pcr   = ..............................1.;
+signal w_IR      = .........................00001..;
+signal IORQ      = .........................00010..;
+signal w_A       = .........................00011..;
+signal w_B       = .........................00100..;
+signal w_C       = .........................00101..;
+signal w_D       = .........................00110..;
+signal w_E       = .........................00111..;
+signal w_H       = .........................01000..;
+signal w_L       = .........................01001..;
+signal w_TMP1    = .........................01010..;
+signal w_TMP2    = .........................01011..;
+signal w_ARL     = .........................01100..;
+signal w_ARH     = .........................01101..;
+signal w_SPL     = .........................01110..;
+signal w_SPH     = .........................01111..;
+signal AR_en     = .........................10000..;
+signal w_Out     = .........................10001..;
+signal w_In      = .........................10010..;
+signal w_PC      = .........................10011..;
+signal w_PR      = .........................10100..;
+signal w_MEM     = .........................10101..;
+signal unused    = .........................10110..;
+signal unused    = .........................10111..;
+signal unused    = .........................11000..;
+signal unused    = .........................11001..;
+signal unused    = .........................11010..;
+signal HLT       = .........................11011..;
+signal CYmode1   = .........................11100..;
+signal Int_en    = .........................11101..;
+signal Int_dis   = .........................11110..;
+signal w_State   = .........................11111..;
+signal r_PC      = ....................00001.......;
+signal r_PR      = ....................00010.......;
+signal r_A       = ....................00011.......;
+signal r_B       = ....................00100.......;
+signal r_C       = ....................00101.......;
+signal r_D       = ....................00110.......;
+signal r_E       = ....................00111.......;
+signal r_H       = ....................01000.......;
+signal r_L       = ....................01001.......;
+signal r_TMP1    = ....................01010.......;
+signal r_TMP2    = ....................01011.......;
+signal r_SPL     = ....................01100.......;
+signal r_SPH     = ....................01101.......;
+signal r_ALU     = ....................01110.......;
+signal r_MEM     = ....................01111.......;
+signal r_In      = ....................10000.......;
+signal r_IR      = ....................10001.......;
+signal r_RST     = ....................10010.......;
+signal r_START   = ....................10011.......;
+signal IN_OUT    = ....................10100.......;
+signal r_Out     = ....................10101.......;
+signal unused    = ....................10110.......;
+signal unused    = ....................10111.......;
+signal unused    = ....................11000.......;
+signal unused    = ....................11001.......;
+signal unused    = ....................11010.......;
+signal INT_ack   = ....................11011.......;
+signal CYmode2   = ....................11100.......;
+signal r_DAA     = ....................11101.......;
+signal TMPclr    = ....................11110.......;
+signal INTclr    = ....................11111.......;
+signal ALU_Add   = .................000............;
+signal ALU_Sub   = .................001............;
+signal ALU_AND   = .................010............;
+signal ALU_LSR   = .................011............;
+signal ALU_CMPL  = .................100............;
+signal ALU_OR    = .................101............;
+signal ALU_XOR   = .................110............;
+signal ALU_free  = .................111............;
+signal CY_reg    = ...............01...............;
+signal C_in      = ...............10...............;
+signal CY_tmp    = ...............11...............;
+signal CYtmp_in  = ..............1.................;
+signal SYNC      = .............1..................;
+signal SP_en     = ............1...................;
+signal SP_dir    = ...........1....................;
+signal Flag_C    = ........000.....................;
+signal Flag_V    = ........001.....................;
+signal Flag_P    = ........010.....................;
+signal Flag_AC   = ........100.....................;
+signal Flag_Z    = ........110.....................;
+signal Flag_S    = ........111.....................;
+signal Flag_BUS  = .......1........................;
+signal r_Flags   = ......1.........................;
+signal w_Flg-CY  = ....01..........................;
+signal w_CY      = ....10..........................;
+signal w_Flags   = ....11..........................;
+signal Init      = ..00............................;
+signal Fetch     = ..01............................;
+signal Execute   = ..10............................;
+signal Interrupt = ..11............................;
+signal RxC       = .1..............................;
+signal CLR_uc    = 1...............................;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Crucial microcode macros.
+//
+///////////////////////////////////////////////////////////////////////////////
+
+// CPU States
+
+#define S_INIT \
+	Init, w_State, CLR_uc
+
+#define S_FETCH \
+	Fetch, w_State, CLR_uc
+
+#define S_EXEC \
+	Execute, w_State, CLR_uc
+
+#define S_INT \
+	Interrupt, w_State, CLR_uc
+
+// MOV between Registers
+#define _MOV_REG(_dst,_src) \
+  r_##_src, w_##_dst
+
+// Load 2 Registers into Addr. Reg.
+#define _LOAD_ADDR(_LSB, _MSB) \
+	r_##_LSB, w_ARL;             \
+	r_##_MSB, w_ARH
+
+// Read Mem to Reg.
+#define _READ_MEM(_srcL, _srcH, _dst) \
+  r_##_srcL, w_ARL;                   \
+  r_##_srcH, w_ARH;                   \
+  r_MEM, w_##_dst
+
+// Write Reg to Mem.
+#define _WRITE_MEM(_dstL, _dstH, _src) \
+  r_##_dstL, w_ARL;       						 \
+  r_##_dstH, w_ARH;       						 \
+  r_##_src, w_MEM
+
+// Fetch Cycle 1st Byte, clear TMP1, TMP2
+#define _FETCH         \
+	_READ_MEM(PC,PR,IR); \
+  S_EXEC, PCen, TMPclr
+
+// Fetch next byte for 2/3 Byte OPs during Exec
+#define _FNEXT(_dst)     \
+  r_PC, w_ARL;           \
+  r_PR, w_ARH;           \
+  r_MEM, w_##_dst, PCen
+
+// Zero Register by writing pulled down CPU BUS
+#define _ZERO(_reg)   \
+  r_##_reg
+
+// Add Register + Accumulator (A), Flags ok.
+#define _ADD(_reg)               \
+  r_A, w_TMP1;                   \
+  r_##_reg, w_TMP2;              \
+  ALU_Add, r_ALU, w_A, w_Flags;  \
+	S_FETCH
+
+// Add Register + Accumulator (A) + Carry Flag, Flags ok.
+#define _ADC(_reg)                         \
+  r_A, w_TMP1;                             \
+  r_##_reg, w_TMP2;                        \
+  ALU_Add, CY_reg, r_ALU, w_A, w_Flags;    \
+	S_FETCH
+
+// Substract Register from Accumulator (A), Flags ok.
+#define _SUB(_reg)               \
+  r_A, w_TMP1;                   \
+  r_##_reg, w_TMP2;              \
+  ALU_Sub, r_ALU, w_A, w_Flags;  \
+	S_FETCH
+
+// Substract Register from Accumulator (A) with Borrow, Flags ok.
+#define _SBB(_reg)               \
+  r_A, w_TMP1;                   \
+  r_##_reg, w_TMP2;              \
+  CY_reg, ALU_Sub, r_ALU, w_A, w_Flags;  \
+	S_FETCH
+
+// Increment Register
+#define _INR(_reg)    \
+  r_##_reg, w_TMP1;   \
+  C_in, ALU_ADD, r_ALU, w_##_reg, w_Flg-CY; \
+  S_FETCH
+
+// Decrement Register
+#define _DCR(_reg)    \
+  r_##_reg, w_TMP1;   \
+  C_in, ALU_SUB, r_ALU, w_##_reg, w_Flg-CY; \
+  S_FETCH
+
+// Increment Register Pair (Helper FF CY_tmp for C)
+#define _INX(_regH,_regL)                              \
+  r_##_regL, w_TMP1;                                   \
+	C_in, CYtmp_in, ALU_ADD, r_ALU, w_##_regL; \
+  r_##_regH, w_TMP1;                                   \
+	CY_tmp, ALU_ADD, r_ALU, w_##_regH;       \
+	S_FETCH;
+
+// Decrement Register Pair (Helper FF CY_tmp for C)
+#define _DCX(_regH,_regL)                              \
+  r_##_regL, w_TMP1;                                   \
+	C_in, CYtmp_in, ALU_SUB, r_ALU, w_##_regL; \
+  r_##_regH, w_TMP1;                                   \
+	CY_tmp, ALU_SUB, r_ALU, w_##_regH;       \
+	S_FETCH;
+
+// Double Add Register Pair
+#define _DAD(_regH,_regL)                    \
+  r_L, w_TMP1;                               \
+  r_##_regL, w_TMP2;                         \
+	ALU_ADD, r_ALU, w_L, w_CY;              \
+  r_H, w_TMP1;                               \
+  r_##_regH, w_TMP2;                         \
+	CY_reg, ALU_ADD, r_ALU, w_H, w_CY;    \
+	S_FETCH;
+
+// Register & Accumulator (A) -> A
+#define _ANA(_reg)               \
+  r_A, w_TMP1;                   \
+  r_##_reg, w_TMP2;              \
+  ALU_AND, r_ALU, w_A, w_Flags;  \
+	S_FETCH
+
+// Register | Accumulator (A) -> A
+#define _ORA(_reg)               \
+  r_A, w_TMP1;                   \
+  r_##_reg, w_TMP2;              \
+  ALU_OR, r_ALU, w_A, w_Flags;   \
+	S_FETCH
+
+// Register ^ Accumulator (A) -> A
+#define _XRA(_reg)               \
+  r_A, w_TMP1;                   \
+  r_##_reg, w_TMP2;              \
+  ALU_XOR, r_ALU, w_A, w_Flags;  \
+	S_FETCH
+
+// Compare Register with Accumulator (A) (SUB with save flags only)
+#define _CMP(_reg)               \
+  r_A, w_TMP1;                   \
+  r_##_reg, w_TMP2;              \
+  ALU_Sub, w_Flags;              \
+	S_FETCH
+
+// Jump conditional true (Fetch next 2 Bytes and Jump)
+#define _JCtrue(_cond)               \
+  r_PC, w_ARL, Flag_##_cond;         \
+  r_PR, w_ARH, Flag_##_cond;         \
+  r_MEM, w_TMP1, PCen, Flag_##_cond; \
+  r_PC, w_ARL, Flag_##_cond;         \
+  r_PR, w_ARH, Flag_##_cond;         \
+  r_MEM, w_PR, PCen, Flag_##_cond;   \
+  r_TMP1, w_PC, Flag_##_cond;        \
+	S_FETCH, Flag_##_cond
+
+// Jump conditional false (Skip next 2 Bytes and fetch)
+#define _JCfalse(_cond)              \
+	Flag_##_cond, PCen;                \
+	Flag_##_cond, PCen;                \
+	S_FETCH, Flag_##_cond
+
+// Call conditional true (Prepare Jump, save PR/PC to Stack)
+#define _CCtrue(_cond)                              \
+  r_PC, w_ARL, Flag_##_cond;                        \
+  r_PR, w_ARH, Flag_##_cond;                        \
+  r_MEM, w_TMP1, PCen, Flag_##_cond;                \
+  r_PC, w_ARL, Flag_##_cond;                        \
+  r_PR, w_ARH, Flag_##_cond;                        \
+  r_MEM, w_TMP2, PCen, SP_en, SP_dir, Flag_##_cond; \
+  r_SPL, w_ARL, Flag_##_cond; 			                \
+  r_SPH, w_ARH, Flag_##_cond;  			                \
+  r_PR, w_MEM, Flag_##_cond;                        \
+  SP_en, SP_dir, Flag_##_cond;                      \
+  r_SPL, w_ARL, Flag_##_cond; 			                \
+  r_SPH, w_ARH, Flag_##_cond;  			                \
+  r_PC, w_MEM, Flag_##_cond;                        \
+  r_TMP1, w_PC, Flag_##_cond;                       \
+  r_TMP2, w_PR, Flag_##_cond;                       \
+	S_FETCH, Flag_##_cond
+
+// Call conditional false (Skip next 2 Bytes and fetch)
+#define _CCfalse(_cond)              \
+	Flag_##_cond, PCen;                \
+	Flag_##_cond, PCen;                \
+	S_FETCH, Flag_##_cond
+
+// Return conditional true
+#define _RCtrue(_cond)              \
+  r_SPL, w_ARL, Flag_##_cond;       \
+  r_SPH, w_ARH, Flag_##_cond;       \
+  r_MEM, w_PC, Flag_##_cond, SP_en; \
+  r_SPL, w_ARL, Flag_##_cond;       \
+  r_SPH, w_ARH, Flag_##_cond;       \
+  r_MEM, w_PR, Flag_##_cond, SP_en; \
+  S_FETCH, Flag_##_cond
+
+// Return conditional false
+#define _RCfalse(_cond)             \
+  S_FETCH, Flag_##_cond
+
+// Push (Don't end in Fetch to make it usable for 2 operand pushes)
+#define _PUSH(_reg) \
+  SP_en, SP_dir;    \
+  r_SPL, w_ARL;     \
+  r_SPH, w_ARH;  		\
+  r_##_reg, w_MEM;  
+
+// Pop (Don't end in Fetch to make it usable for 2 operand pops)
+#define _POP(_reg) \
+  r_SPL, w_ARL;    \
+  r_SPH, w_ARH;    \
+  r_MEM, w_##_reg; \
+  SP_en
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// The Microcode itself.
+//
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// State 0 (Initialization)
+//
+///////////////////////////////////////////////////////////////////////////////
+
+start OP=XXXXXXXX, FLAG=X, state=00, INT=X;
+      Int_dis, INTclr, CLR_pcr, w_Flags;
+			r_START, w_PR;
+		  S_FETCH;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// State 1 (Fetch) if no pending Interrupt
+// else change to State 3 (Interrupt)
+//
+///////////////////////////////////////////////////////////////////////////////
+
+// Normal Fetch Cycle
+start OP=XXXXXXXX, FLAG=X, state=01, INT=0;
+      _FETCH;
+
+// Handle Interrupt
+start OP=XXXXXXXX, FLAG=X, state=01, INT=1;
+      S_INT;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// State 2 (Execute)
+// If unkown OP just Fetch again. 
+//
+///////////////////////////////////////////////////////////////////////////////
+
+// Normal Fetch Cycle
+start OP=XXXXXXXX, FLAG=X, state=10, INT=X;
+      _FETCH;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// State 3 (Interrupt)
+// 
+// Handle Interrupt, after cleared branch to State 1 (Fetch)
+//
+///////////////////////////////////////////////////////////////////////////////
+
+// Handle Interrupt
+start OP=XXXXXXXX, FLAG=X, state=11, INT=1;
+      INT_dis; INT_ack; // Signal interrupt received, OP should be on Bus.
+			w_IN;             // Read OP
+			_MOV_REG(IR,IN);  // Move OP to IR
+			INTclr;           // Clear Interrupt
+			S_EXEC;           // Start Exec Cycle.
+
+// Int is cleared, go back to Fetch in all uaddr positions
+start OP=XXXXXXXX, FLAG=X, state=11, INT=0;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+      S_FETCH;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Data Transfer Group 
+//
+// Move operations (MOV dst,src)
+//
+// Special case MOV Reg into itself, simply do nothing.
+//
+///////////////////////////////////////////////////////////////////////////////
+
+// Dst. A
+
+start OP=MOVAA, FLAG=X, state=10, INT=X;
+      S_FETCH;          // Do nothing
+
+start OP=MOVAB, FLAG=X, state=10, INT=X;
+      _MOV_REG(A,B);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVAC, FLAG=X, state=10, INT=X;
+      _MOV_REG(A,C);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVAD, FLAG=X, state=10, INT=X;
+      _MOV_REG(A,D);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVAE, FLAG=X, state=10, INT=X;
+      _MOV_REG(A,E);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVAH, FLAG=X, state=10, INT=X;
+      _MOV_REG(A,H);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVAL, FLAG=X, state=10, INT=X;
+      _MOV_REG(A,L);    // Move src. to dst.
+			S_FETCH;
+
+// Dst. B
+
+start OP=MOVBA, FLAG=X, state=10, INT=X;
+      _MOV_REG(B,A);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVBB, FLAG=X, state=10, INT=X;
+			S_FETCH;
+
+start OP=MOVBC, FLAG=X, state=10, INT=X;
+      _MOV_REG(B,C);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVBD, FLAG=X, state=10, INT=X;
+      _MOV_REG(B,D);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVBE, FLAG=X, state=10, INT=X;
+      _MOV_REG(B,E);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVBH, FLAG=X, state=10, INT=X;
+      _MOV_REG(B,H);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVBL, FLAG=X, state=10, INT=X;
+      _MOV_REG(B,L);    // Move src. to dst.
+			S_FETCH;
+
+// Dst. C
+
+start OP=MOVCA, FLAG=X, state=10, INT=X;
+      _MOV_REG(C,A);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVCB, FLAG=X, state=10, INT=X;
+      _MOV_REG(C,B);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVCC, FLAG=X, state=10, INT=X;
+			S_FETCH;
+
+start OP=MOVCD, FLAG=X, state=10, INT=X;
+      _MOV_REG(C,D);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVCE, FLAG=X, state=10, INT=X;
+      _MOV_REG(C,E);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVCH, FLAG=X, state=10, INT=X;
+      _MOV_REG(C,H);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVCL, FLAG=X, state=10, INT=X;
+      _MOV_REG(C,L);    // Move src. to dst.
+			S_FETCH;
+
+// Dst. D
+
+start OP=MOVDA, FLAG=X, state=10, INT=X;
+      _MOV_REG(D,A);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVDB, FLAG=X, state=10, INT=X;
+      _MOV_REG(D,B);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVDC, FLAG=X, state=10, INT=X;
+      _MOV_REG(D,C);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVDD, FLAG=X, state=10, INT=X;
+			S_FETCH;
+
+start OP=MOVDE, FLAG=X, state=10, INT=X;
+      _MOV_REG(D,E);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVDH, FLAG=X, state=10, INT=X;
+      _MOV_REG(D,H);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVDL, FLAG=X, state=10, INT=X;
+      _MOV_REG(D,L);    // Move src. to dst.
+			S_FETCH;
+
+// Dst. E
+
+start OP=MOVEA, FLAG=X, state=10, INT=X;
+      _MOV_REG(E,A);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVEB, FLAG=X, state=10, INT=X;
+      _MOV_REG(E,B);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVEC, FLAG=X, state=10, INT=X;
+      _MOV_REG(E,C);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVED, FLAG=X, state=10, INT=X;
+      _MOV_REG(E,D);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVEE, FLAG=X, state=10, INT=X;
+			S_FETCH;
+
+start OP=MOVEH, FLAG=X, state=10, INT=X;
+      _MOV_REG(E,H);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVEL, FLAG=X, state=10, INT=X;
+      _MOV_REG(E,L);    // Move src. to dst.
+			S_FETCH;
+
+// Dst. H
+
+start OP=MOVHA, FLAG=X, state=10, INT=X;
+      _MOV_REG(H,A);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVHB, FLAG=X, state=10, INT=X;
+      _MOV_REG(H,B);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVHC, FLAG=X, state=10, INT=X;
+      _MOV_REG(H,C);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVHD, FLAG=X, state=10, INT=X;
+      _MOV_REG(H,D);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVHE, FLAG=X, state=10, INT=X;
+      _MOV_REG(H,E);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVHH, FLAG=X, state=10, INT=X;
+			S_FETCH;
+
+start OP=MOVHL, FLAG=X, state=10, INT=X;
+      _MOV_REG(H,L);    // Move src. to dst.
+			S_FETCH;
+
+// Dst. L
+
+start OP=MOVLA, FLAG=X, state=10, INT=X;
+      _MOV_REG(L,A);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVLB, FLAG=X, state=10, INT=X;
+      _MOV_REG(L,B);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVLC, FLAG=X, state=10, INT=X;
+      _MOV_REG(L,C);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVLD, FLAG=X, state=10, INT=X;
+      _MOV_REG(L,D);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVLE, FLAG=X, state=10, INT=X;
+      _MOV_REG(L,E);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVLH, FLAG=X, state=10, INT=X;
+      _MOV_REG(L,H);    // Move src. to dst.
+			S_FETCH;
+
+start OP=MOVLL, FLAG=X, state=10, INT=X;
+			S_FETCH;
+
+// M -> Reg.
+
+start OP=MOVAM, FLAG=X, state=10, INT=X;
+      _READ_MEM(L, H, A); // Read Value to Reg.
+			S_FETCH;
+
+start OP=MOVBM, FLAG=X, state=10, INT=X;
+      _READ_MEM(L, H, B); // Read Value to Reg.
+			S_FETCH;
+
+start OP=MOVCM, FLAG=X, state=10, INT=X;
+      _READ_MEM(L, H, C); // Read Value to Reg.
+			S_FETCH;
+
+start OP=MOVDM, FLAG=X, state=10, INT=X;
+      _READ_MEM(L, H, D); // Read Value to Reg.
+			S_FETCH;
+
+start OP=MOVEM, FLAG=X, state=10, INT=X;
+      _READ_MEM(L, H, E); // Read Value to Reg.
+			S_FETCH;
+
+start OP=MOVHM, FLAG=X, state=10, INT=X;
+      _READ_MEM(L, H, H); // Read Value to Reg.
+			S_FETCH;
+
+start OP=MOVLM, FLAG=X, state=10, INT=X;
+      _READ_MEM(L, H, L); // Read Value to Reg.
+			S_FETCH;
+
+// Reg. -> M
+
+start OP=MOVMA, FLAG=X, state=10, INT=X;
+      _WRITE_MEM(L, H, A);
+			S_FETCH;
+
+start OP=MOVMB, FLAG=X, state=10, INT=X;
+      _WRITE_MEM(L, H, B);
+			S_FETCH;
+
+start OP=MOVMC, FLAG=X, state=10, INT=X;
+      _WRITE_MEM(L, H, C);
+			S_FETCH;
+
+start OP=MOVMD, FLAG=X, state=10, INT=X;
+      _WRITE_MEM(L, H, D);
+			S_FETCH;
+
+start OP=MOVME, FLAG=X, state=10, INT=X;
+      _WRITE_MEM(L, H, E);
+			S_FETCH;
+
+start OP=MOVMH, FLAG=X, state=10, INT=X;
+      _WRITE_MEM(L, H, H);
+			S_FETCH;
+
+start OP=MOVML, FLAG=X, state=10, INT=X;
+      _WRITE_MEM(L, H, L);
+			S_FETCH;
+
+// Immediate -> Reg.
+
+start OP=MVIA, FLAG=X, state=10, INT=X;
+      _FNEXT(A); // Load next Byte -> Reg.
+			S_FETCH;
+
+start OP=MVIB, FLAG=X, state=10, INT=X;
+      _FNEXT(B); // Load next Byte -> Reg.
+			S_FETCH;
+
+start OP=MVIC, FLAG=X, state=10, INT=X;
+      _FNEXT(C); // Load next Byte -> Reg.
+			S_FETCH;
+
+start OP=MVID, FLAG=X, state=10, INT=X;
+      _FNEXT(D); // Load next Byte -> Reg.
+			S_FETCH;
+
+start OP=MVIE, FLAG=X, state=10, INT=X;
+      _FNEXT(E); // Load next Byte -> Reg.
+			S_FETCH;
+
+start OP=MVIH, FLAG=X, state=10, INT=X;
+      _FNEXT(H); // Load next Byte -> Reg.
+			S_FETCH;
+
+start OP=MVIL, FLAG=X, state=10, INT=X;
+      _FNEXT(L); // Load next Byte -> Reg.
+			S_FETCH;
+
+// Immediate -> Mem
+
+start OP=MVIM, FLAG=X, state=10, INT=X;
+      _FNEXT(TMP1);         // Load next Byte -> Reg.
+      _LOAD_ADDR(L,H);      // Load Addr. from L,H
+      _WRITE_MEM(L,H,TMP1); // Write Value to Memory.
+			S_FETCH;
+
+// 2 Byte Immediate -> Reg. pair
+
+start OP=LXIBC, FLAG=X, state=10, INT=X;
+      _FNEXT(C); // Load next Byte -> Reg.
+      _FNEXT(B); // Load next Byte -> Reg.
+			S_FETCH;
+
+start OP=LXIDE, FLAG=X, state=10, INT=X;
+      _FNEXT(E); // Load next Byte -> Reg.
+      _FNEXT(D); // Load next Byte -> Reg.
+			S_FETCH;
+
+start OP=LXIHL, FLAG=X, state=10, INT=X;
+      _FNEXT(L); // Load next Byte -> Reg.
+      _FNEXT(H); // Load next Byte -> Reg.
+			S_FETCH;
+
+start OP=LXISP, FLAG=X, state=10, INT=X;
+      _FNEXT(SPL); // Load next Byte -> Reg.
+      _FNEXT(SPH); // Load next Byte -> Reg.
+			S_FETCH;
+
+// Mem -> A
+
+start OP=LDA, FLAG=X, state=10, INT=X;
+      _FNEXT(TMP1);           // Load next Byte -> Reg. Can't use ARL
+      _FNEXT(TMP2);           // Load next Byte -> Reg. Can't use ARH
+      _READ_MEM(TMP1,TMP2,A); // Read Value to Reg.
+			S_FETCH;
+
+// A -> Mem
+
+start OP=STA, FLAG=X, state=10, INT=X;
+      _FNEXT(TMP1);            // Load next Byte -> Reg.
+      _FNEXT(TMP2);            // Load next Byte -> Reg.
+      _WRITE_MEM(TMP1,TMP2,A); // Read Value to Reg.
+			S_FETCH;
+
+// Addr. in Mem -> HL pair
+
+start OP=LHLD, FLAG=X, state=10, INT=X;
+      _FNEXT(TMP1);          // Load next Byte -> Reg.
+      _FNEXT(TMP2);          // Load next Byte -> Reg.
+			_MOV_REG(ARL,TMP1);    // LSB of Addr -> ARL
+			_MOV_REG(ARH,TMP2);    // MSB of Addr -> ARH
+      r_MEM, w_L;            // Read Mem to L Reg.
+			AR_en;                 // Increment Addr. Reg.
+      r_MEM, w_H;            // Read Mem +1 to H Reg.
+			S_FETCH;
+
+// HL pair -> Mem
+
+start OP=SHLD, FLAG=X, state=10, INT=X;
+      _FNEXT(TMP1);          // Load next Byte -> Reg.
+      _FNEXT(TMP2);          // Load next Byte -> Reg.
+			_MOV_REG(ARL,TMP1);    // LSB of Addr -> ARL
+			_MOV_REG(ARH,TMP2);    // MSB of Addr -> ARH
+      r_L, w_MEM;            // Write L Reg. -> Mem
+			AR_en;                 // Increment Addr. Reg.
+      r_H, w_MEM;            // Write H Reg. -> Mem + 1
+			S_FETCH;
+
+// Mem -> A Reg.
+
+start OP=LDAXBC, FLAG=X, state=10, INT=X;
+      _READ_MEM(C,B,A); // Read Value to Reg.
+			S_FETCH;
+
+start OP=LDAXDE, FLAG=X, state=10, INT=X;
+      _READ_MEM(E,D,A); // Read Value to Reg.
+			S_FETCH;
+
+// A Reg. -> MEM
+
+start OP=STAXBC, FLAG=X, state=10, INT=X;
+      _WRITE_MEM(C,B,A); // Read Value to Reg.
+			S_FETCH;
+
+start OP=STAXDE, FLAG=X, state=10, INT=X;
+      _WRITE_MEM(E,D,A); // Read Value to Reg.
+			S_FETCH;
+
+// Exchange H <-> D and L <-> E
+
+start OP=XCHG, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,H);    // Move src. to dst.
+      _MOV_REG(H,D);       // Move src. to dst.
+      _MOV_REG(D,TMP1);    // Move src. to dst.
+      _MOV_REG(TMP1,L);    // Move src. to dst.
+      _MOV_REG(L,E);       // Move src. to dst.
+      _MOV_REG(E,TMP1);    // Move src. to dst.
+			S_FETCH;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Arithmetic Group
+//
+///////////////////////////////////////////////////////////////////////////////
+
+start OP=ADDA, FLAG=X, state=10, INT=X;
+      _ADD(A);                      // A & Reg. -> A,Flags
+
+start OP=ADDB, FLAG=X, state=10, INT=X;
+      _ADD(B);                      // A & Reg. -> A,Flags
+
+start OP=ADDC, FLAG=X, state=10, INT=X;
+      _ADD(C);                      // A & Reg. -> A,Flags
+
+start OP=ADDD, FLAG=X, state=10, INT=X;
+      _ADD(D);                      // A & Reg. -> A,Flags
+
+start OP=ADDE, FLAG=X, state=10, INT=X;
+      _ADD(E);                      // A & Reg. -> A,Flags
+
+start OP=ADDH, FLAG=X, state=10, INT=X;
+      _ADD(H);                      // A & Reg. -> A,Flags
+
+start OP=ADDL, FLAG=X, state=10, INT=X;
+      _ADD(L);                      // A & Reg. -> A,Flags
+
+start OP=ADDM, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);             // Move Reg. to TMP1
+			_READ_MEM(L,H,TMP2);          // Load Value from L,H
+			ALU_Add, r_ALU, w_A, w_Flags; // Add, store in A and store Flags.
+			S_FETCH;
+
+start OP=ADI, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);             // Move Reg. to TMP1
+      _FNEXT(TMP2);                 // Load next Byte -> Reg.
+			ALU_Add, r_ALU, w_A, w_Flags; // Add, store A and Flags.
+			S_FETCH;
+
+start OP=ADCA, FLAG=X, state=10, INT=X;
+      _ADC(A);                                // A + Reg. + CY -> A
+
+start OP=ADCB, FLAG=X, state=10, INT=X;
+      _ADC(B);                                // A + Reg. + CY -> A
+
+start OP=ADCC, FLAG=X, state=10, INT=X;
+      _ADC(C);                                // A + Reg. + CY -> A
+
+start OP=ADCD, FLAG=X, state=10, INT=X;
+      _ADC(D);                                // A + Reg. + CY -> A
+
+start OP=ADCE, FLAG=X, state=10, INT=X;
+      _ADC(E);                                // A + Reg. + CY -> A
+
+start OP=ADCH, FLAG=X, state=10, INT=X;
+      _ADC(H);                                // A + Reg. + CY -> A
+
+start OP=ADCL, FLAG=X, state=10, INT=X;
+      _ADC(L);                                // A + Reg. + CY -> A
+
+start OP=ADCM, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);                       // Move Reg. to TMP1
+			_READ_MEM(L,H,TMP2);                    // Load Value from L,H
+			ALU_Add, CY_reg, r_ALU, w_A, w_Flags;   // Add +CY, store A and Flags.
+			S_FETCH;
+
+start OP=ACI, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);                       // Move Reg. to TMP1
+      _FNEXT(TMP2);                           // Load next Byte -> Reg.
+			ALU_Add, CY_reg, r_ALU, w_A, w_Flags;   // Add +CY, store A and Flags.
+			S_FETCH;
+
+start OP=SUBA, FLAG=X, state=10, INT=X;
+      _SUB(A);                      // Substract Reg. from Accumulator (A)
+
+start OP=SUBB, FLAG=X, state=10, INT=X;
+      _SUB(B);                      // Substract Reg. from Accumulator (A)
+
+start OP=SUBC, FLAG=X, state=10, INT=X;
+      _SUB(C);                      // Substract Reg. from Accumulator (A)
+
+start OP=SUBD, FLAG=X, state=10, INT=X;
+      _SUB(D);                      // Substract Reg. from Accumulator (A)
+
+start OP=SUBE, FLAG=X, state=10, INT=X;
+      _SUB(E);                      // Substract Reg. from Accumulator (A)
+
+start OP=SUBH, FLAG=X, state=10, INT=X;
+      _SUB(H);                      // Substract Reg. from Accumulator (A)
+
+start OP=SUBL, FLAG=X, state=10, INT=X;
+      _SUB(L);                      // Substract Reg. from Accumulator (A)
+
+start OP=SUBM, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);             // Move Reg. to TMP1
+      _READ_MEM(L,H,TMP2);          // Store Data in TMP1
+			ALU_Sub, r_ALU, w_A, w_Flags; // Sub, store in A and store Flags.
+			S_FETCH;
+
+start OP=SUI, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);             // Move Reg. to TMP1
+      _FNEXT(TMP2);                 // Load next Byte -> Reg.
+			ALU_Sub, r_ALU, w_A, w_Flags; // Sub, store A and Flags.
+			S_FETCH;
+
+start OP=SBBA, FLAG=X, state=10, INT=X;
+      _SBB(A);                      // Substract Reg. from Accumulator (A)
+
+start OP=SBBB, FLAG=X, state=10, INT=X;
+      _SBB(B);                      // Substract Reg. from Accumulator (A)
+
+start OP=SBBC, FLAG=X, state=10, INT=X;
+      _SBB(C);                      // Substract Reg. from Accumulator (A)
+
+start OP=SBBD, FLAG=X, state=10, INT=X;
+      _SBB(D);                      // Substract Reg. from Accumulator (A)
+
+start OP=SBBE, FLAG=X, state=10, INT=X;
+      _SBB(E);                      // Substract Reg. from Accumulator (A)
+
+start OP=SBBH, FLAG=X, state=10, INT=X;
+      _SBB(H);                      // Substract Reg. from Accumulator (A)
+
+start OP=SBBL, FLAG=X, state=10, INT=X;
+      _SBB(L);                      // Substract Reg. from Accumulator (A)
+
+start OP=SBBM, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);                       // Move Reg. to TMP1
+      _READ_MEM(L,H,TMP2);                    // Store Data in TMP1
+			ALU_Sub, CY_reg, r_ALU, w_A, w_Flags;  // Sub, store in A and store Flags
+			S_FETCH;
+
+start OP=SBI, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);                       // Move Reg. to TMP1
+      _FNEXT(TMP2);                           // Load next Byte -> Reg.
+			ALU_Sub, CY_reg, r_ALU, w_A, w_Flags;   // Sub, store A and Flags.
+			S_FETCH;
+
+start OP=INRA, FLAG=X, state=10, INT=X;
+      _INR(A);                                // Incr. Reg.
+
+start OP=INRB, FLAG=X, state=10, INT=X;
+      _INR(B);                                // Incr. Reg.
+
+start OP=INRC, FLAG=X, state=10, INT=X;
+      _INR(C);                                // Incr. Reg.
+
+start OP=INRD, FLAG=X, state=10, INT=X;
+      _INR(D);                                // Incr. Reg.
+
+start OP=INRE, FLAG=X, state=10, INT=X;
+      _INR(E);                                // Incr. Reg.
+
+start OP=INRH, FLAG=X, state=10, INT=X;
+      _INR(H);                                // Incr. Reg.
+
+start OP=INRL, FLAG=X, state=10, INT=X;
+      _INR(L);                                // Incr. Reg.
+
+start OP=INRM, FLAG=X, state=10, INT=X;
+      _READ_MEM(L,H,TMP1);                             // Store Data in TMP1
+			C_in, ALU_ADD, r_ALU, w_TMP2, w_Flg-CY;          // Increment -> TMP2
+			_WRITE_MEM(L,H,TMP2);                            // Store in Mem
+			S_FETCH;
+
+
+start OP=DCRA, FLAG=X, state=10, INT=X;
+      _DCR(A);                                // Decr. Reg.
+
+start OP=DCRB, FLAG=X, state=10, INT=X;
+      _DCR(B);                                // Decr. Reg.
+
+start OP=DCRC, FLAG=X, state=10, INT=X;
+      _DCR(C);                                // Decr. Reg.
+
+start OP=DCRD, FLAG=X, state=10, INT=X;
+      _DCR(D);                                // Decr. Reg.
+
+start OP=DCRE, FLAG=X, state=10, INT=X;
+      _DCR(E);                                // Decr. Reg.
+
+start OP=DCRH, FLAG=X, state=10, INT=X;
+      _DCR(H);                                // Decr. Reg.
+
+start OP=DCRL, FLAG=X, state=10, INT=X;
+      _DCR(L);                                // Decr. Reg.
+
+start OP=DCRM, FLAG=X, state=10, INT=X;
+      _READ_MEM(L,H,TMP1);                     // Store Data in TMP1
+			C_in, ALU_Sub, r_ALU, w_TMP2, w_Flg-CY;  // Increment -> TMP2
+			_WRITE_MEM(L,H,TMP2);                            // Store in Mem
+			S_FETCH;
+
+
+start OP=INXB, FLAG=X, state=10, INT=X;             // TMP2 cleared by FETCH
+      _INX(B,C);
+
+start OP=INXD, FLAG=X, state=10, INT=X;             // TMP2 cleared by FETCH
+      _INX(D,E);
+
+start OP=INXH, FLAG=X, state=10, INT=X;             // TMP2 cleared by FETCH
+      _INX(H,L);
+
+start OP=INXSP, FLAG=X, state=10, INT=X;            // SP is counter
+			S_FETCH, SP_en;
+
+start OP=DCXB, FLAG=X, state=10, INT=X;             // TMP2 cleared by FETCH
+      _DCX(B,C);
+
+start OP=DCXD, FLAG=X, state=10, INT=X;             // TMP2 cleared by FETCH
+      _DCX(D,E);
+
+start OP=DCXH, FLAG=X, state=10, INT=X;             // TMP2 cleared by FETCH
+      _DCX(H,L);
+
+start OP=DCXSP, FLAG=X, state=10, INT=X;            // SP is counter
+			S_FETCH, SP_en, SP_dir;
+
+start OP=DADB, FLAG=X, state=10, INT=X;             // TMP2 cleared by FETCH
+      _DAD(B,C);
+
+start OP=DADD, FLAG=X, state=10, INT=X;             // TMP2 cleared by FETCH
+      _DAD(D,E);
+
+start OP=DADH, FLAG=X, state=10, INT=X;             // TMP2 cleared by FETCH
+      _DAD(H,L);
+
+start OP=DADSP, FLAG=X, state=10, INT=X;            // SP is counter
+      _DAD(SPH,SPL);
+
+start OP=DAA, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);                             // A -> TMP1
+      _MOV_REG(TMP2,DAA);                           // Cal. correction -> TMP2
+      ALU_ADD, CYmode1, CYmode2, w_Flags;           // Save Flags with DAA CY
+      ALU_ADD, r_ALU, w_A;                          // Correct A with TMP2
+      S_FETCH;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Logical Group
+//
+///////////////////////////////////////////////////////////////////////////////
+
+start OP=ANAA, FLAG=X, state=10, INT=X;
+      _ANA(A);                      // Accumulator (A) & Reg. -> A
+
+start OP=ANAB, FLAG=X, state=10, INT=X;
+      _ANA(B);                      // Accumulator (A) & Reg. -> A
+
+start OP=ANAC, FLAG=X, state=10, INT=X;
+      _ANA(C);                      // Accumulator (A) & Reg. -> A
+
+start OP=ANAD, FLAG=X, state=10, INT=X;
+      _ANA(D);                      // Accumulator (A) & Reg. -> A
+
+start OP=ANAE, FLAG=X, state=10, INT=X;
+      _ANA(E);                      // Accumulator (A) & Reg. -> A
+
+start OP=ANAH, FLAG=X, state=10, INT=X;
+      _ANA(H);                      // Accumulator (A) & Reg. -> A
+
+start OP=ANAL, FLAG=X, state=10, INT=X;
+      _ANA(L);                      // Accumulator (A) & Reg. -> A
+
+start OP=ANAM, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);             // Move Reg. to TMP1
+			_READ_MEM(L,H,TMP2);          // Load Value from L,H
+			ALU_AND, r_ALU, w_A, w_Flags; // AND, store in A and store Flags.
+			S_FETCH;
+
+start OP=ANI, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);             // A -> TMP1
+      _FNEXT(TMP2);                 // Load next Byte -> Reg.
+			ALU_AND, r_ALU, w_A, w_Flags; // AND Immediate and A, store Flags.
+			S_FETCH;
+
+start OP=XRAA, FLAG=X, state=10, INT=X;
+      _XRA(A);                     // A XOR Reg. -> A + Flags
+
+start OP=XRAB, FLAG=X, state=10, INT=X;
+      _XRA(B);                     // A XOR Reg. -> A + Flags
+
+start OP=XRAC, FLAG=X, state=10, INT=X;
+      _XRA(C);                     // A XOR Reg. -> A + Flags
+
+start OP=XRAD, FLAG=X, state=10, INT=X;
+      _XRA(D);                     // A XOR Reg. -> A + Flags
+
+start OP=XRAE, FLAG=X, state=10, INT=X;
+      _XRA(E);                     // A XOR Reg. -> A + Flags
+
+start OP=XRAH, FLAG=X, state=10, INT=X;
+      _XRA(H);                     // A XOR Reg. -> A + Flags
+
+start OP=XRAL, FLAG=X, state=10, INT=X;
+      _XRA(L);                     // A XOR Reg. -> A + Flags
+
+start OP=XRAM, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);             // Move Reg. to TMP1
+			_READ_MEM(L,H,TMP2);          // Load Value from L,H
+			ALU_XOR, r_ALU, w_A, w_Flags; // Add, store in A and store Flags.
+			S_FETCH;
+
+start OP=XRI, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);             // A -> TMP1
+      _FNEXT(TMP2);                 // Load next Byte -> Reg.
+			ALU_XOR, r_ALU, w_A, w_Flags; // XOR Immediate and A, store Flags.
+			S_FETCH;
+
+start OP=ORAA, FLAG=X, state=10, INT=X;
+      _ORA(A);                     // A OR Reg. -> A + Flags
+
+start OP=ORAB, FLAG=X, state=10, INT=X;
+      _ORA(B);                     // A OR Reg. -> A + Flags
+
+start OP=ORAC, FLAG=X, state=10, INT=X;
+      _ORA(C);                     // A OR Reg. -> A + Flags
+
+start OP=ORAD, FLAG=X, state=10, INT=X;
+      _ORA(D);                     // A OR Reg. -> A + Flags
+
+start OP=ORAE, FLAG=X, state=10, INT=X;
+      _ORA(E);                     // A OR Reg. -> A + Flags
+
+start OP=ORAH, FLAG=X, state=10, INT=X;
+      _ORA(H);                     // A OR Reg. -> A + Flags
+
+start OP=ORAL, FLAG=X, state=10, INT=X;
+      _ORA(L);                     // A OR Reg. -> A + Flags
+
+start OP=ORAM, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);             // Move Reg. to TMP1
+			_READ_MEM(L,H,TMP2);          // Load Value from L,H
+			ALU_OR, r_ALU, w_A, w_Flags;  // Add, store in A and store Flags.
+			S_FETCH;
+
+start OP=ORI, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);             // A -> TMP1
+      _FNEXT(TMP2);                 // Load next Byte -> Reg.
+			ALU_OR, r_ALU, w_A, w_Flags;  // OR Immediate and A, store Flags.
+			S_FETCH;
+
+start OP=CMPA, FLAG=X, state=10, INT=X;
+      _CMP(A);                     // A == Reg. -> A + Flags
+
+start OP=CMPB, FLAG=X, state=10, INT=X;
+      _CMP(B);                     // A == Reg. -> A + Flags
+
+start OP=CMPC, FLAG=X, state=10, INT=X;
+      _CMP(C);                     // A == Reg. -> A + Flags
+
+start OP=CMPD, FLAG=X, state=10, INT=X;
+      _CMP(D);                     // A == Reg. -> A + Flags
+
+start OP=CMPE, FLAG=X, state=10, INT=X;
+      _CMP(E);                     // A == Reg. -> A + Flags
+
+start OP=CMPH, FLAG=X, state=10, INT=X;
+      _CMP(H);                     // A == Reg. -> A + Flags
+
+start OP=CMPL, FLAG=X, state=10, INT=X;
+      _CMP(L);                     // A == Reg. -> A + Flags
+
+start OP=CMPM, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);             // Move Reg. to TMP1
+			_READ_MEM(L,H,TMP2);          // Load Value from L,H
+      ALU_Sub, w_Flags;             // 
+			S_FETCH;
+
+start OP=CPI, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A); // Reg. -> A
+      _FNEXT(TMP2);     // Load next Byte -> Reg.
+			ALU_Sub, w_Flags; // Substract Immediate from A, store Flags.
+			S_FETCH;
+
+start OP=CMA, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);     // Reg. -> A
+			ALU_CMPL, r_ALU, w_A; // Negate Akkmulator, Store result in Akkmulator
+			S_FETCH;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Branch Group
+//
+///////////////////////////////////////////////////////////////////////////////
+
+start OP=JMP, FLAG=X, state=10, INT=X;
+      _FNEXT(TMP1);               // Copy target LSB to TMP1 (LSB)
+      _FNEXT(PR);                 // Copy target MSB to PR (PC MSB)
+			_MOV_REG(PC,TMP1);          // Copy TMP1 -> PC (LSB)
+			S_FETCH;
+
+start OP=CALL, FLAG=X, state=10, INT=X;
+      _FNEXT(TMP1);               // Copy target LSB to TMP1 (LSB), inc. PC
+      _FNEXT(TMP2),SP_en, SP_dir; // Dst. MSB to TMP2 (PC MSB == PR), PC++, SP--
+			_WRITE_MEM(SPL,SPH,PR);     // Write PR to (Stack -1)
+      SP_en, SP_dir;              // Decrement SP
+			_WRITE_MEM(SPL,SPH,PC);     // Write PC to (Stack -2)
+			_MOV_REG(PC,TMP1);          // Move TMP1 top PC (PC LSB)
+			_MOV_REG(PR,TMP2);          // Move TMP2 top PR (PC MSB)
+			S_FETCH;
+
+start OP=RET, FLAG=X, state=10, INT=X;
+      _READ_MEM(SPL,SPH,PC);  // Read PC from (Stack)
+			SP_en;                  // Increment Stack
+      _READ_MEM(SPL,SPH,PR);  // Read PC from (Stack)
+			SP_en;                  // Increment Stack
+			S_FETCH;
+//
+// Conditional Jumps:
+//
+
+start OP=JNZ, FLAG=0, state=10, INT=X;
+      _JCtrue(Z);                 // Not Z is true (Z=0)
+
+start OP=JNZ, FLAG=1, state=10, INT=X;
+      _JCfalse(Z);                // Not Z is false (Z=1)
+
+start OP=JZ, FLAG=1, state=10, INT=X;
+      _JCtrue(Z);                 // Z is true (Z=1)
+
+start OP=JZ, FLAG=0, state=10, INT=X;
+      _JCfalse(Z);                // Z is false (Z=0)
+
+
+start OP=JNC, FLAG=0, state=10, INT=X;
+      _JCtrue(C);                 // Not C is true (C=0)
+
+start OP=JNC, FLAG=1, state=10, INT=X;
+      _JCfalse(C);                // Not C is false (C=1)
+
+start OP=JC, FLAG=1, state=10, INT=X;
+      _JCtrue(C);                 // C is true (C=1)
+
+start OP=JC, FLAG=0, state=10, INT=X;
+      _JCfalse(C);                // C is false (C=0)
+
+
+start OP=JPO, FLAG=0, state=10, INT=X;
+      _JCtrue(P);                 // Odd Parity true (P=0)
+
+start OP=JPO, FLAG=1, state=10, INT=X;
+      _JCfalse(P);                // Odd Parity false (P=1)
+
+start OP=JPE, FLAG=1, state=10, INT=X;
+      _JCtrue(P);                 // Even Parity true (P=1)
+
+start OP=JPE, FLAG=0, state=10, INT=X;
+      _JCfalse(P);                // Even Parity false (P=0)
+
+
+start OP=JP, FLAG=0, state=10, INT=X;
+      _JCtrue(S);                 // Plus is true (S=0)
+
+start OP=JP, FLAG=1, state=10, INT=X;
+      _JCfalse(S);                // Plus is false (S=1)
+
+start OP=JM, FLAG=1, state=10, INT=X;
+      _JCtrue(S);                 // Minus is true (S=1)
+
+start OP=JM, FLAG=0, state=10, INT=X;
+      _JCfalse(S);                // Not Minus (S=0)
+
+//
+// Conditional Calls:
+//
+
+start OP=CNZ, FLAG=0, state=10, INT=X;
+      _CCtrue(Z);                 // Not Z is true (Z=0)
+
+start OP=CNZ, FLAG=1, state=10, INT=X;
+      _CCfalse(Z);                // Not Z is false (Z=1)
+
+start OP=CZ, FLAG=1, state=10, INT=X;
+      _CCtrue(Z);                 // Z is true (Z=1)
+
+start OP=CZ, FLAG=0, state=10, INT=X;
+      _CCfalse(Z);                // Z is false (Z=0)
+
+
+start OP=CNC, FLAG=0, state=10, INT=X;
+      _CCtrue(C);                 // Not C is true (C=0)
+
+start OP=CNC, FLAG=1, state=10, INT=X;
+      _CCfalse(C);                // Not C is false (C=1)
+
+start OP=CC, FLAG=1, state=10, INT=X;
+      _CCtrue(C);                 // C is true (C=1)
+
+start OP=CC, FLAG=0, state=10, INT=X;
+      _CCfalse(C);                // C is false (C=0)
+
+
+start OP=CPO, FLAG=0, state=10, INT=X;
+      _CCtrue(P);                 // Odd Parity true (P=0)
+
+start OP=CPO, FLAG=1, state=10, INT=X;
+      _CCfalse(P);                // Odd Parity false (P=1)
+
+start OP=CPE, FLAG=1, state=10, INT=X;
+      _CCtrue(P);                 // Even Parity true (P=1)
+
+start OP=CPE, FLAG=0, state=10, INT=X;
+      _CCfalse(P);                // Even Parity false (P=0)
+
+
+start OP=CP, FLAG=0, state=10, INT=X;
+      _CCtrue(S);                 // Plus is true (S=0)
+
+start OP=CP, FLAG=1, state=10, INT=X;
+      _CCfalse(S);                // Plus is false (S=1)
+
+start OP=CM, FLAG=1, state=10, INT=X;
+      _CCtrue(S);                 // Minus is true (S=1)
+
+start OP=CM, FLAG=0, state=10, INT=X;
+      _CCfalse(S);                // Not Minus (S=0)
+
+
+//
+// Conditional Return based on zero flag:
+//
+
+start OP=RNZ, FLAG=0, state=10, INT=X;
+      _RCtrue(Z);
+
+start OP=RNZ, FLAG=1, state=10, INT=X;
+      _RCfalse(Z);
+
+start OP=RZ, FLAG=1, state=10, INT=X;
+      _RCtrue(Z);
+
+start OP=RZ, FLAG=0, state=10, INT=X;
+      _RCfalse(Z);
+
+
+start OP=RNC, FLAG=0, state=10, INT=X;
+      _RCtrue(C);
+
+start OP=RNC, FLAG=1, state=10, INT=X;
+      _RCfalse(C);
+
+start OP=RC, FLAG=1, state=10, INT=X;
+      _RCtrue(C);
+
+start OP=RC, FLAG=0, state=10, INT=X;
+      _RCfalse(C);
+
+
+start OP=RPO, FLAG=0, state=10, INT=X;
+      _RCtrue(P);
+
+start OP=RPO, FLAG=1, state=10, INT=X;
+      _RCfalse(P);
+
+start OP=RPE, FLAG=1, state=10, INT=X;
+      _RCtrue(P);
+
+start OP=RPE, FLAG=0, state=10, INT=X;
+      _RCfalse(P);
+
+
+start OP=RP, FLAG=0, state=10, INT=X;
+      _RCtrue(S);
+
+start OP=RP, FLAG=1, state=10, INT=X;
+      _RCfalse(S);
+
+start OP=RM, FLAG=1, state=10, INT=X;
+      _RCtrue(S);
+
+start OP=RM, FLAG=0, state=10, INT=X;
+      _RCfalse(S);
+
+start OP=RLC, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);
+      _MOV_REG(TMP2,A);
+			ALU_ADD, r_ALU, w_A, w_CY, RxC;
+			S_FETCH;
+
+start OP=RRC, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);
+			ALU_LSR, r_ALU, w_A, w_CY, RxC;
+			S_FETCH;
+
+start OP=RAL, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);
+      _MOV_REG(TMP2,A);
+			ALU_ADD, r_ALU, w_A, CY_reg, w_CY;
+			S_FETCH;
+
+start OP=RAR, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,A);
+			ALU_LSR, r_ALU, w_A, CY_reg, w_CY;
+			S_FETCH;
+
+start OP=CMC, FLAG=X, state=10, INT=X;
+      Flag_BUS, r_Flags, CYmode1, w_CY;
+			S_FETCH;
+
+start OP=STC, FLAG=X, state=10, INT=X;
+      Flag_BUS, r_Flags, CYmode2, w_CY;
+			S_FETCH;
+
+start OP=RST, FLAG=X, state=10, INT=X;
+      _PUSH(PR);   
+			_PUSH(PC);   // Save complete PC on Stack
+      w_PR;        // Clear PR
+			r_RST, w_PC; // Set PC to RST Address
+			S_FETCH;
+
+start OP=PCHL, FLAG=X, state=10, INT=X;
+      _MOV_REG(PR,H);
+      _MOV_REG(PC,L);
+			S_FETCH;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Stack, I/O, and Machine Control Group
+//
+///////////////////////////////////////////////////////////////////////////////
+
+start OP=PUSHB, FLAG=X, state=10, INT=X;
+      _PUSH(B);
+			_PUSH(C);
+			S_FETCH;
+
+start OP=PUSHD, FLAG=X, state=10, INT=X;
+      _PUSH(D);
+			_PUSH(E);
+			S_FETCH;
+
+start OP=PUSHH, FLAG=X, state=10, INT=X;
+      _PUSH(H);
+			_PUSH(L);
+			S_FETCH;
+
+start OP=PUSHPSW, FLAG=X, state=10, INT=X;
+      _PUSH(A);
+			_PUSH(Flags);
+			S_FETCH;
+
+start OP=POPB, FLAG=X, state=10, INT=X;
+      _POP(C);
+			_POP(B);
+			S_FETCH;
+
+start OP=POPD, FLAG=X, state=10, INT=X;
+      _POP(E);
+			_POP(D);
+			S_FETCH;
+
+start OP=POPH, FLAG=X, state=10, INT=X;
+      _POP(L);
+			_POP(H);
+			S_FETCH;
+
+start OP=POPPSW, FLAG=X, state=10, INT=X;
+      r_SPL, w_ARL;              \
+      r_SPH, w_ARH;              \
+      r_MEM, Flag_BUS, w_Flags;  \
+			SP_en;                     \
+			_POP(A);                   \
+			S_FETCH;
+
+// Exchange stack top with H and L
+start OP=XTHL, FLAG=X, state=10, INT=X;
+      _MOV_REG(TMP1,L);             // L -> TMP1
+      _READ_MEM(SPL,SPH,L);         // Mem(SP) -> L
+      r_SPL, w_ARL; 
+      r_SPH, w_ARH;
+      r_TMP1, w_MEM, SP_en;         // TMP1 -> Mem, SP++
+      _MOV_REG(TMP1,H);             // L -> TMP1
+      _READ_MEM(SPL,SPH,H);         // Mem(SP) -> H
+      r_SPL, w_ARL; 
+      r_SPH, w_ARH;
+      r_TMP1, w_MEM, SP_en, SP_dir; // TMP1 -> Mem, SP--, FETCH.
+			S_FETCH;
+
+// Move HL to SP
+start OP=SPHL, FLAG=X, state=10, INT=X;
+      _MOV_REG(SPH,H);
+			_MOV_REG(SPL,L);
+			S_FETCH;
+
+
+start OP=NOP, FLAG=X, state=10, INT=X;
+      nop;		         // Do nothing
+			S_FETCH;
+
+start OP=HLT, FLAG=X, state=10, INT=X;
+      HLT;             // Halt
+			S_FETCH;
+
+start OP=OUT, FLAG=X, state=10, INT=X;
+      _FNEXT(ARL);       // Get Port and write to lower addr. Reg.
+      _MOV_REG(OUT,A);   // Move A to output Buffer
+      r_OUT, IORQ;       // Signal I/O op (DevID on Addr. Bus L)
+      r_OUT, IORQ, SYNC; // Signal Data is on external Bus
+      S_FETCH;
+
+start OP=IN, FLAG=X, state=10, INT=X;
+      _FNEXT(ARL);       // Get Port and write to lower addr. Reg.
+      IN_OUT, w_In;      // Signal IN Op (IN_OUT sets IORQ), Transfer Data to input reg.
+      IN_OUT,SYNC;       // End Transfer.
+      _MOV_REG(A,In);    // Move input Buffer to A
+      S_FETCH;
+
+start OP=EI, FLAG=X, state=10, INT=X;
+      Int_en;
+      S_FETCH;
+
+start OP=DI, FLAG=X, state=10, INT=X;
+      Int_dis;
+      S_FETCH;

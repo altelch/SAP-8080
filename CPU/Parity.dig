@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<circuit>
+  <version>2</version>
+  <attributes>
+    <entry>
+      <string>shapeType</string>
+      <shapeType>SIMPLE</shapeType>
+    </entry>
+    <entry>
+      <string>backgroundColor</string>
+      <awt-color>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+        <alpha>255</alpha>
+      </awt-color>
+    </entry>
+    <entry>
+      <string>Description</string>
+      <string>8 bit Even Parity Generator</string>
+    </entry>
+    <entry>
+      <string>romContent</string>
+      <romList>
+        <roms/>
+      </romList>
+    </entry>
+  </attributes>
+  <visualElements>
+    <visualElement>
+      <elementName>In</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Label</string>
+          <string>IN</string>
+        </entry>
+        <entry>
+          <string>Bits</string>
+          <int>8</int>
+        </entry>
+      </elementAttributes>
+      <pos x="1440" y="-140"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Splitter</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Input Splitting</string>
+          <string>8</string>
+        </entry>
+        <entry>
+          <string>splitterSpreading</string>
+          <int>2</int>
+        </entry>
+        <entry>
+          <string>Output Splitting</string>
+          <string>1*8</string>
+        </entry>
+      </elementAttributes>
+      <pos x="1500" y="-140"/>
+    </visualElement>
+    <visualElement>
+      <elementName>XOr</elementName>
+      <elementAttributes>
+        <entry>
+          <string>wideShape</string>
+          <boolean>true</boolean>
+        </entry>
+      </elementAttributes>
+      <pos x="1560" y="-140"/>
+    </visualElement>
+    <visualElement>
+      <elementName>XOr</elementName>
+      <elementAttributes>
+        <entry>
+          <string>wideShape</string>
+          <boolean>true</boolean>
+        </entry>
+      </elementAttributes>
+      <pos x="1660" y="-120"/>
+    </visualElement>
+    <visualElement>
+      <elementName>XOr</elementName>
+      <elementAttributes>
+        <entry>
+          <string>wideShape</string>
+          <boolean>true</boolean>
+        </entry>
+      </elementAttributes>
+      <pos x="1760" y="-100"/>
+    </visualElement>
+    <visualElement>
+      <elementName>XOr</elementName>
+      <elementAttributes>
+        <entry>
+          <string>wideShape</string>
+          <boolean>true</boolean>
+        </entry>
+      </elementAttributes>
+      <pos x="1860" y="-80"/>
+    </visualElement>
+    <visualElement>
+      <elementName>XOr</elementName>
+      <elementAttributes>
+        <entry>
+          <string>wideShape</string>
+          <boolean>true</boolean>
+        </entry>
+      </elementAttributes>
+      <pos x="1960" y="-60"/>
+    </visualElement>
+    <visualElement>
+      <elementName>XOr</elementName>
+      <elementAttributes>
+        <entry>
+          <string>wideShape</string>
+          <boolean>true</boolean>
+        </entry>
+      </elementAttributes>
+      <pos x="2060" y="-40"/>
+    </visualElement>
+    <visualElement>
+      <elementName>XOr</elementName>
+      <elementAttributes>
+        <entry>
+          <string>wideShape</string>
+          <boolean>true</boolean>
+        </entry>
+      </elementAttributes>
+      <pos x="2160" y="-20"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Not</elementName>
+      <elementAttributes/>
+      <pos x="2260" y="0"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Out</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Label</string>
+          <string>P</string>
+        </entry>
+      </elementAttributes>
+      <pos x="2320" y="0"/>
+    </visualElement>
+  </visualElements>
+  <wires>
+    <wire>
+      <p1 x="2040" y="0"/>
+      <p2 x="2060" y="0"/>
+    </wire>
+    <wire>
+      <p1 x="2240" y="0"/>
+      <p2 x="2260" y="0"/>
+    </wire>
+    <wire>
+      <p1 x="2300" y="0"/>
+      <p2 x="2320" y="0"/>
+    </wire>
+    <wire>
+      <p1 x="1520" y="-100"/>
+      <p2 x="1560" y="-100"/>
+    </wire>
+    <wire>
+      <p1 x="1740" y="-100"/>
+      <p2 x="1760" y="-100"/>
+    </wire>
+    <wire>
+      <p1 x="1520" y="-20"/>
+      <p2 x="1740" y="-20"/>
+    </wire>
+    <wire>
+      <p1 x="1940" y="-20"/>
+      <p2 x="1960" y="-20"/>
+    </wire>
+    <wire>
+      <p1 x="2140" y="-20"/>
+      <p2 x="2160" y="-20"/>
+    </wire>
+    <wire>
+      <p1 x="1520" y="100"/>
+      <p2 x="2040" y="100"/>
+    </wire>
+    <wire>
+      <p1 x="1520" y="20"/>
+      <p2 x="1840" y="20"/>
+    </wire>
+    <wire>
+      <p1 x="2140" y="20"/>
+      <p2 x="2160" y="20"/>
+    </wire>
+    <wire>
+      <p1 x="1840" y="-40"/>
+      <p2 x="1860" y="-40"/>
+    </wire>
+    <wire>
+      <p1 x="2040" y="-40"/>
+      <p2 x="2060" y="-40"/>
+    </wire>
+    <wire>
+      <p1 x="1640" y="-120"/>
+      <p2 x="1660" y="-120"/>
+    </wire>
+    <wire>
+      <p1 x="1520" y="-140"/>
+      <p2 x="1560" y="-140"/>
+    </wire>
+    <wire>
+      <p1 x="1440" y="-140"/>
+      <p2 x="1500" y="-140"/>
+    </wire>
+    <wire>
+      <p1 x="1520" y="-60"/>
+      <p2 x="1640" y="-60"/>
+    </wire>
+    <wire>
+      <p1 x="1740" y="-60"/>
+      <p2 x="1760" y="-60"/>
+    </wire>
+    <wire>
+      <p1 x="1940" y="-60"/>
+      <p2 x="1960" y="-60"/>
+    </wire>
+    <wire>
+      <p1 x="1520" y="140"/>
+      <p2 x="2140" y="140"/>
+    </wire>
+    <wire>
+      <p1 x="1520" y="60"/>
+      <p2 x="1940" y="60"/>
+    </wire>
+    <wire>
+      <p1 x="1640" y="-80"/>
+      <p2 x="1660" y="-80"/>
+    </wire>
+    <wire>
+      <p1 x="1840" y="-80"/>
+      <p2 x="1860" y="-80"/>
+    </wire>
+    <wire>
+      <p1 x="1840" y="-40"/>
+      <p2 x="1840" y="20"/>
+    </wire>
+    <wire>
+      <p1 x="1940" y="-20"/>
+      <p2 x="1940" y="60"/>
+    </wire>
+    <wire>
+      <p1 x="1640" y="-80"/>
+      <p2 x="1640" y="-60"/>
+    </wire>
+    <wire>
+      <p1 x="2040" y="0"/>
+      <p2 x="2040" y="100"/>
+    </wire>
+    <wire>
+      <p1 x="1740" y="-60"/>
+      <p2 x="1740" y="-20"/>
+    </wire>
+    <wire>
+      <p1 x="2140" y="20"/>
+      <p2 x="2140" y="140"/>
+    </wire>
+  </wires>
+  <measurementOrdering/>
+</circuit>
